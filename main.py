@@ -16,7 +16,8 @@ model = genai.GenerativeModel("gemini-3.6-flash")
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "result": ""})
+    # تم تصحيح ترتيب الوسائط لتتوافق مع الإصدارات الحديثة
+    return templates.TemplateResponse(request, "index.html", {"result": ""})
 
 @app.post("/process", response_class=HTMLResponse)
 async def process_text(request: Request, text: str = Form(...), action: str = Form(...)):
@@ -35,5 +36,6 @@ async def process_text(request: Request, text: str = Form(...), action: str = Fo
     except Exception as e:
         result = f"حدث خطأ أثناء المعالجة: {str(e)}"
 
-    return templates.TemplateResponse("index.html", {"request": request, "result": result, "original_text": text})
+    # تم تصحيح ترتيب الوسائط هنا أيضاً
+    return templates.TemplateResponse(request, "index.html", {"result": result, "original_text": text})
 

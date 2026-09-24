@@ -12,8 +12,8 @@ api_key = os.getenv("GEMINI_API_KEY") or os.getenv("OPENAI_API_KEY")
 if api_key:
     genai.configure(api_key=api_key)
 
-# تم تغيير النموذج هنا إلى gemini-pro لضمان عمله فوراً وبدون أخطاء
-model = genai.GenerativeModel("gemini-pro")
+# تم التحديث إلى النموذج المدعوم الحالي
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):

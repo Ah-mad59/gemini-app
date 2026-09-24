@@ -12,8 +12,8 @@ api_key = os.getenv("GEMINI_API_KEY") or os.getenv("OPENAI_API_KEY")
 if api_key:
     genai.configure(api_key=api_key)
 
-# تم التحديث إلى النموذج المدعوم الحالي
-model = genai.GenerativeModel("gemini-2.5-flash")
+# التحديث إلى النموذج المطلوب من رسالة النظام
+model = genai.GenerativeModel("gemini-3.6-flash")
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
@@ -37,3 +37,4 @@ async def process_text(request: Request, text: str = Form(...), action: str = Fo
         result = f"حدث خطأ أثناء المعالجة: {str(e)}"
 
     return templates.TemplateResponse(request, "index.html", {"request": request, "result": result, "original_text": text})
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مساعد الذكاء الاصطناعي</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background: #f4f7f6; padding: 20px; direction: rtl; text-align: right; }
+        .container { max-width: 600px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); margin: auto; }
+        textarea { width: 100%; height: 120px; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+        select, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        .result { background: #e9ecef; padding: 15px; border-radius: 5px; margin-top: 20px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>مساعد معالجة النصوص بالذكاء الاصطناعي 🤖</h2>
+        <form action="/process" method="POST">
+            <label>أدخل النص هنا:</label>
+            <textarea name="text" required>{{ original_text if original_text else '' }}</textarea>
+
+            <label>اختر العملية:</label>
+            <select name="action">
+                <option value="fix">تصحيح الأخطاء والإملاء</option>
+                <option value="summarize">تلخيص النص</option>
+                <option value="rewrite">إعادة صياغة باحتراف</option>
+            </select>
+
+            <button type="submit">تنفيذ العملية 🚀</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <strong>النتيجة:</strong>
+                <p>{{ result }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

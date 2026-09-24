@@ -2,40 +2,78 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>مساعد الذكاء الاصطناعي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مساعد الذكاء الاصطناعي الاحترافي</title>
+    <!-- Tailwind CSS لتصميم عصري وسريع -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: Tahoma, sans-serif; background: #f4f7f6; padding: 20px; direction: rtl; text-align: right; }
-        .container { max-width: 600px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); margin: auto; }
-        textarea { width: 100%; height: 120px; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-        select, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box; }
-        button { background: #007bff; color: white; border: none; cursor: pointer; font-weight: bold; }
-        button:hover { background: #0056b3; }
-        .result { background: #e9ecef; padding: 15px; border-radius: 5px; margin-top: 20px; white-space: pre-wrap; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        body { font-family: 'Cairo', sans-serif; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h2>مساعد معالجة النصوص بالذكاء الاصطناعي 🤖</h2>
-        <form action="/process" method="POST">
-            <label>أدخل النص هنا:</label>
-            <textarea name="text" required>{{ original_text if original_text else '' }}</textarea>
+<body class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 min-h-screen text-slate-100 flex items-center justify-center p-4">
 
-            <label>اختر العملية:</label>
-            <select name="action">
-                <option value="fix">تصحيح الأخطاء والإملاء</option>
-                <option value="summarize">تلخيص النص</option>
-                <option value="rewrite">إعادة صياغة باحتراف</option>
-            </select>
+    <div class="w-full max-w-3xl bg-slate-800/70 backdrop-blur-2xl border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10">
+        
+        <!-- الهيدر -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white text-2xl shadow-lg shadow-indigo-500/30 mb-4">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">مساعد معالجة النصوص الذكي</h1>
+            <p class="text-slate-400 text-sm mt-2">قم بتحسين وتطوير نصوصك واكتشاف أفكار جديدة بلمسة واحدة</p>
+        </div>
 
-            <button type="submit">تنفيذ العملية 🚀</button>
+        <!-- الفورم -->
+        <form action="/process" method="POST" class="space-y-6">
+            <div>
+                <label class="block text-sm font-semibold text-slate-300 mb-2">
+                    <i class="fa-regular fa-pen-to-square ml-1 text-indigo-400"></i> النص المراد معالجته
+                </label>
+                <textarea name="text" rows="4" required 
+                    class="w-full bg-slate-900/60 border border-slate-700/80 rounded-2xl p-4 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition shadow-inner"
+                    placeholder="اكتب أو الصق النص هنا..."></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-300 mb-2">
+                    <i class="fa-solid fa-sliders ml-1 text-indigo-400"></i> حدد العملية المطلوبة
+                </label>
+                <div class="relative">
+                    <select name="action" class="w-full bg-slate-900/60 border border-slate-700/80 rounded-2xl p-4 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition appearance-none cursor-pointer">
+                        <option value="fix" class="bg-slate-800">✨ تصحيح الأخطاء الإملائية والنحوية وتنسيق النص</option>
+                        <option value="summarize" class="bg-slate-800">📝 تلخيص النص بوضوح واختصار شديد</option>
+                        <option value="rewrite" class="bg-slate-800">🚀 إعادة صياغة النص بأسلوب احترافي وبليغ</option>
+                    </select>
+                    <div class="absolute inset-y-0 left-0 flex items-center px-4 pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 transition duration-200 flex items-center justify-center gap-3 cursor-pointer text-lg">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>تنفيذ العملية بالذكاء الاصطناعي</span>
+            </button>
         </form>
 
+        <!-- صندوق النتائج (يظهر فقط عند وجود نتيجة) -->
         {% if result %}
-            <div class="result">
-                <strong>النتيجة:</strong>
-                <p>{{ result }}</p>
+        <div class="mt-8 pt-6 border-t border-slate-700/80 animate-fade-in">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-base font-bold text-indigo-400 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check"></i> النتيجة المعالجة:
+                </h2>
             </div>
+            <div class="bg-slate-900/80 border border-slate-700/80 rounded-2xl p-5 text-slate-200 whitespace-pre-wrap leading-relaxed shadow-inner">
+                {{ result }}
+            </div>
+        </div>
         {% endif %}
+
     </div>
+
 </body>
 </html>
